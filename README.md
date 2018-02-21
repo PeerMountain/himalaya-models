@@ -2,6 +2,21 @@
 
 HBase Models for Himalaya.
 
+### Configurations
+There are two environment variables to be set:
+
+* `HBASE_HOSTNAME`: HBase Thrift server hostname.  
+* `HABSE_PORT`: HBase Thrift server port. Default to 9090.  
+
+### How to use it?
+First, install it:
+```bash
+$ pipenv install git+ssh://git@stash.dxm.local:7999/kyc/himalaya-hbase-models.git
+```
+
+Second, configure the environment variables.
+
+Third, run it :)
 ```python
 from hymalaya_hbase_models import Persona, Message
 
@@ -20,11 +35,3 @@ print(messages)
 ```
 
 The **Persona** and **Message** models are available. To check supported fields, take a looks at `models.py`.
-
-### How to use it?
-Install it from Stash and import into your Python project :)
-
-### Configurations
-There are two environment variables to set:
-* `HBASE_HOSTNAME`: HBase Thrift server hostname.
-* `HABSE_PORT`: HBase Thrift server port. Default to 9090.
