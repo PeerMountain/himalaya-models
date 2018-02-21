@@ -10,13 +10,15 @@ There are two environment variables to be set:
 
 ### How to use it?
 First, install it:
-```bash
+
+```
 $ pipenv install git+ssh://git@stash.dxm.local:7999/kyc/himalaya-hbase-models.git
 ```
 
 Second, configure the environment variables.
 
 Third, run it :)
+
 ```python
 from hymalaya_hbase_models import Persona, Message
 
