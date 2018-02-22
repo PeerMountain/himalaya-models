@@ -1,4 +1,4 @@
-# Hymalaya HBase Models
+# Himalaya HBase Models
 
 HBase Models for Himalaya.
 
@@ -20,7 +20,7 @@ Second, configure the environment variables.
 Third, run it :)
 
 ```python
-from hymalaya_hbase_models import Persona, Message
+from himalaya_hbase_models import Persona, Message
 
 
 # Writing data
