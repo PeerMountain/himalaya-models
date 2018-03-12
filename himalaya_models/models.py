@@ -11,7 +11,24 @@ logger = logging.getLogger(__name__)
 logging.config.dictConfig(LOGGING)
 
 
-class Message(HBaseBase, ESMessage):
+class ModelBase:
+    """
+    Define some common methods to be used in all Models.
+    """
+
+    def save(self):
+        try:
+            self.save_to_hbase()
+            self.save_to_es()
+        except:
+            self.delete_from_hbase()
+            self.delete_from_es()
+            logger.error(exc)
+        else:
+            logger.info(f'{self} sucessfully saved')
+
+
+class Message(ModelBase, HBaseBase, ESMessage):
     hbase_table = 'message'
     hbase_family = 'message'
     hbase_row_key = 'hash'
@@ -63,19 +80,7 @@ class Message(HBaseBase, ESMessage):
         messages = [cls.get(hash=hash) for hash in hashes if hashes]
         return messages
 
-    def save(self):
-        try:
-            self.save_to_hbase()
-            self.save_to_es()
-        except:
-            self.delete_from_hbase()
-            self.delete_from_es()
-            logger.error(exc)
-        else:
-            logger.info(f'{self} sucessfully saved')
-
-
-class Persona(HBaseBase, ESPersona):
+class Persona(ModelBase, HBaseBase, ESPersona):
     hbase_table = 'persona'
     hbase_family = 'persona'
     hbase_row_key = 'address'
@@ -108,14 +113,3 @@ class Persona(HBaseBase, ESPersona):
         if nickname:
             address = cls.get_address_from_es(nickname=nickname)
             return cls.get_from_hbase(address)
-
-    def save(self):
-        try:
-            self.save_to_hbase()
-            self.save_to_es()
-        except:
-            self.delete_from_hbase()
-            self.delete_from_es()
-            logger.error(exc)
-        else:
-            logger.info(f'{self} sucessfully saved')
