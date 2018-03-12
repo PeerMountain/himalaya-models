@@ -8,9 +8,15 @@ from setuptools import setup, find_packages
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
-requirements = ["happybase==1.1.0"]
+requirements = [
+    "happybase==1.1.0",
+    "elasticsearch-dsl>=6.0.0,<7.0.0",
+]
 
-setup_requirements = ["happybase==1.1.0"]
+setup_requirements = [
+    "happybase==1.1.0",
+    "elasticsearch-dsl>=6.0.0,<7.0.0",
+]
 
 setup(
     author="Jonatas Baldin",
