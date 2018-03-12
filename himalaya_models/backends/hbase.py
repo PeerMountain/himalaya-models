@@ -19,6 +19,8 @@ class HBaseBase:
 
     @classmethod
     def connect_hbase(self):
+        # TODO: Instead of calling connect_hbase each time we need
+        # abstract it to a `connections` variable, as Elasticsearch-DSL does
         try:
             conn = happybase.Connection(HBASE_HOSTNAME, HBASE_PORT, autoconnect=True).table(self.hbase_table)
             logger.debug('Connected to HBase')
