@@ -18,6 +18,7 @@ class ModelBase:
 
     def save(self):
         try:
+            # Raise exception if trying to double save a message
             self.save_to_hbase()
             self.save_to_es()
         except:
