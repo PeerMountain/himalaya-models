@@ -90,6 +90,8 @@ class HBaseBase:
                 logger.error(message)
                 raise Exception(message)
 
+        return True
+
     def construct_save_payload(self):
         """
         Construct the payload needed by happybase to save the data to HBase.
