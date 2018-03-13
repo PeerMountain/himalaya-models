@@ -181,6 +181,9 @@ class ESPersona(DocType):
         return result[0].address
 
     def save_to_es(self):
+        """
+        Saves an entry to Elastichsearch.
+        """
         persona = ESPersona()
         self.validate_fields()
 
