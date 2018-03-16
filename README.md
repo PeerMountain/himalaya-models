@@ -1,26 +1,26 @@
-# Himalaya HBase Models
+# Himalaya Models
 
-HBase Models for Himalaya.
+Models for Himalaya.
 
 ### Configurations
 There are two environment variables to be set:
 
 * `HBASE_HOSTNAME`: HBase Thrift server hostname.  
-* `HABSE_PORT`: HBase Thrift server port. Default to 9090.  
+* `HBASE_PORT`: HBase Thrift server port. Default to 9090.  
+* `ES_URL`: Full Elasticsearch URL.
 
 ### How to use it?
-First, install it:
+First, install it as a [Git Submodule](https://chrisjean.com/git-submodules-adding-using-removing-and-updating/).
 
 ```
-$ pipenv install git+ssh://git@stash.dxm.local:7999/kyc/himalaya-hbase-models.git
+$ cd service/
+$ git submodule add ssh://git@stash.dxm.local:7999/kyc/himalaya-models.git himalaya-models
 ```
-
-Second, configure the environment variables.
 
 Third, run it :)
 
 ```python
-from himalaya_hbase_models import Persona, Message
+from himalaya_models import Persona, Message
 
 
 # Writing data
@@ -36,4 +36,30 @@ messages = Message.filter(created_at='2018-02-20')
 print(messages)
 ```
 
-The **Persona** and **Message** models are available. To check supported fields, take a looks at `models.py`.
+The **Persona** and **Message** models are available. Here are the fields supported:
+
+### Message
+
+```
+persona_sender
+persona_pubkey
+persona_nickname
+type
+hash
+signature
+timestamp
+dossier_hash
+body_hash
+acl
+objects
+message
+created_at
+```
+
+### Persona
+```
+address
+pubkey
+nickname
+created_at
+```

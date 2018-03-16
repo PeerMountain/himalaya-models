@@ -102,3 +102,6 @@ ENV/
 
 # No need for the Pipfiles here
 Pipfile*
+
+# pytest
+.pytest_cache

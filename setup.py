@@ -8,9 +8,15 @@ from setuptools import setup, find_packages
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
-requirements = ["happybase==1.1.0"]
+requirements = [
+    "happybase==1.1.0",
+    "elasticsearch-dsl>=6.0.0,<7.0.0",
+]
 
-setup_requirements = ["happybase==1.1.0"]
+setup_requirements = [
+    "happybase==1.1.0",
+    "elasticsearch-dsl>=6.0.0,<7.0.0",
+]
 
 setup(
     author="Jonatas Baldin",
@@ -18,14 +24,14 @@ setup(
     classifiers=[
         'Programming Language :: Python :: 3.6',
     ],
-    description="HBase Models for Himalaya",
+    description="Models for Himalaya",
     install_requires=requirements,
     license="MIT license",
     long_description=readme,
     include_package_data=True,
-    keywords='himalaya_hbase_models',
-    name='himalaya_hbase_models',
-    packages=find_packages(include=['himalaya_hbase_models']),
+    keywords='himalaya__models',
+    name='himalaya_models',
+    packages=find_packages(include=['himalaya_models']),
     setup_requires=setup_requirements,
     test_suite='tests',
     url='',

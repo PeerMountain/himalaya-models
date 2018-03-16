@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Top-level package for Himalaya HBase Models."""
+"""Top-level package for Himalaya Models."""
 
 __author__ = """Jonatas Baldin"""
 __email__ = 'jonatas.baldin@maecenas.co'
