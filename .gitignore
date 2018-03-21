@@ -100,8 +100,5 @@ ENV/
 # mypy
 .mypy_cache/
 
-# No need for the Pipfiles here
-Pipfile*
-
 # pytest
 .pytest_cache

@@ -1,0 +1,21 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+
+[packages]
+
+"e1839a8" = {path = ".", editable = true}
+"flake8" = "*"
+happybase = "*"
+elasticsearch-dsl = "*"
+msgpack-python = "*"
+
+
+[dev-packages]
+
+pytest = "*"
+pytest-env = "*"
+pytest-mock = "*"
