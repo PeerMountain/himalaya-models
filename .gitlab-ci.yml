@@ -1,7 +1,7 @@
 image: python:3.6
 
 before_script:
-  - pip3 install pipenv
+  - pip3 install pipenv --user
 
 pytest:
   stage: test
