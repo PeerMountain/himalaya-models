@@ -6,7 +6,7 @@ before_script:
 pytest:
   stage: test
   script:
-    - pipenv install --dev
+    - pipenv install --dev --python 3.6
     - pipenv run pytest --cov=. tests.py
 
 pages:
