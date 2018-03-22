@@ -1,13 +1,13 @@
 image: python:3.6
 
 before_script:
-  - pip install pipenv
+  - pip3 install pipenv
 
 pytest:
   stage: test
   script:
-  - pipenv install --dev --system
-  - pytest --cov=. tests.py
+    - pipenv install --dev
+    - pipenv run pytest --cov=. tests.py
 
 pages:
   stage: deploy
