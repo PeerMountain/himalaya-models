@@ -8,6 +8,9 @@ pytest:
   script:
     - pipenv install --dev --python 3.6
     - pipenv run pytest --cov=. tests.py
+  artifacts:
+    paths:
+      - htmlcov/
 
 pages:
   stage: deploy
