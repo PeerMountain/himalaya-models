@@ -1,7 +1,7 @@
 import datetime
 import copy
 
-from msgpack import packb
+from umsgpack import packb
 
 from himalaya_models.backends.hbase import HBaseBase
 from himalaya_models.models import Message
