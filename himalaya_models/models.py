@@ -70,7 +70,7 @@ class Message(ModelBase, HBaseBase, ESMessage):
             result['acl'] = unpackb(acl)
 
         objects = result.get('objects')
-        if acl:
+        if objects:
             result['objects'] = unpackb(objects)
 
         return result
