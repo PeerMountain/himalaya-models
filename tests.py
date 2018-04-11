@@ -91,8 +91,8 @@ def test_hbase_dict_to_class():
 def test_message_to_dict_packed_data():
     acl_input = {
         'ACL': [{
-            b'reader': b'reader_address',
-            b'key': b'reader_key',
+            'reader': 'reader_address',
+            'key': 'reader_key',
         }],
     }
 
@@ -105,15 +105,15 @@ def test_message_to_dict_packed_data():
 
     objects_input = {
         'objects': [{
-            'objectHash': b'object_hash',
+            'objectHash': 'object_hash',
             'metaHashes': [
                 'one_meta_hash',
             ],
             'container': {
-                'containerHash': b'container_hash',
+                'containerHash': 'container_hash',
                 'containerSign': {
-                    b'signature': b'message_signature',
-                    b'timestamp': b'message_timestamp',
+                    'signature': 'message_signature',
+                    'timestamp': 'message_timestamp',
                 },
                 'objectContainer': 'object_container',
             }
