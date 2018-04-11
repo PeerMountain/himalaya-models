@@ -1,7 +1,7 @@
 import datetime
 import logging
 import logging.config
-from msgpack import unpackb
+from umsgpack import unpackb
 
 from himalaya_models.config import ES_URL, LOGGING
 from elasticsearch_dsl import connections, DocType, Text, Keyword, InnerDoc, Nested, Q
