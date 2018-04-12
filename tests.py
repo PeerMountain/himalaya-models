@@ -1,4 +1,10 @@
+import datetime
+import copy
+
+from umsgpack import packb
+
 from himalaya_models.backends.hbase import HBaseBase
+from himalaya_models.models import Message
 
 
 class HBaseMock(HBaseBase):
@@ -80,3 +86,62 @@ def test_hbase_to_bytes():
 def test_hbase_dict_to_class():
     _dict = {b'family:field': b'field'}
     assert HBaseMock.dict_to_class(HBaseMock, _dict)
+
+
+def test_message_to_dict_packed_data():
+    acl_input = {
+        'ACL': [{
+            'reader': 'reader_address',
+            'key': 'reader_key',
+        }],
+    }
+
+    acl_output = {
+        'ACL': [{
+            'reader': 'reader_address',
+            'key': 'reader_key',
+        }],
+    }
+
+    objects_input = {
+        'objects': [{
+            'objectHash': 'object_hash',
+            'metaHashes': [
+                'one_meta_hash',
+            ],
+            'container': {
+                'containerHash': 'container_hash',
+                'containerSign': {
+                    'signature': 'message_signature',
+                    'timestamp': 'message_timestamp',
+                },
+                'objectContainer': 'object_container',
+            }
+        }],
+    }
+
+    objects_output = {
+        'objects': [{
+            'objectHash': 'object_hash',
+            'metaHashes': [
+                'one_meta_hash',
+            ],
+            'container': {
+                'containerHash': 'container_hash',
+                'containerSign': {
+                    'signature': 'message_signature',
+                    'timestamp': 'message_timestamp',
+                },
+                'objectContainer': 'object_container',
+            }
+        }],
+    }
+
+    message = Message(
+        acl=packb(acl_input),
+        objects=packb(objects_input), 
+    )
+    message_dict = message.to_dict()
+
+    assert message_dict.get('acl') == acl_output
+    assert message_dict.get('objects') == objects_output

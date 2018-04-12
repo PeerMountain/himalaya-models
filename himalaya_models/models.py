@@ -1,9 +1,10 @@
 import logging
 import datetime
 
+from umsgpack import unpackb
+
 from .backends.hbase import HBaseBase
 from .backends.elasticsearch import ESMessage, ESPersona
-
 from .config import HBASE_HOSTNAME, HBASE_PORT, LOGGING
 
 
@@ -60,6 +61,19 @@ class Message(ModelBase, HBaseBase, ESMessage):
 
     def __repr__(self):
         return f"<Message: '{self.hash}'>"
+
+    def to_dict(self):
+        result = super().to_dict()
+
+        acl = result.get('acl')
+        if acl:
+            result['acl'] = unpackb(acl)
+
+        objects = result.get('objects')
+        if objects:
+            result['objects'] = unpackb(objects)
+
+        return result
 
     @classmethod
     def get(cls, hash=None, container_hash=None):

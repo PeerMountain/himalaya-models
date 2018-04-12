@@ -11,7 +11,7 @@ name = "pypi"
 "flake8" = "*"
 happybase = "*"
 elasticsearch-dsl = "*"
-msgpack-python = "*"
+u-msgpack-python = "*"
 
 
 [dev-packages]
