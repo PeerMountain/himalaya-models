@@ -60,6 +60,11 @@ class ESMessage(DocType):
             ).execute()
             logger.info(f'{result} returned from Elasticsearch')
 
+        if not result or len(result) == 0:
+            message = f'Message does not exist'
+            logger.error(message)
+            raise Exception(message)
+
         if result and len(result) > 1:
             message = f'get_hash_from_es should return just one result'
             logger.error(message)
@@ -189,10 +194,15 @@ class ESPersona(DocType):
             ).execute()
             logger.info(f'{result} returned from Elasticsearch')
 
+        if not result or len(result) == 0:
+            message = f'Persona does not exist'
+            logger.error(message)
+            raise Exception(message)
+
         if result and len(result) > 1:
             message = f'get_address_from_es should return just one result'
             logger.error(message)
-            raise Exeception(message)
+            raise Exception(message)
 
         return result[0].address
 
