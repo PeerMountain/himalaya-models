@@ -146,6 +146,7 @@ class Message(ModelBase, HBaseBase, ESMessage):
         messages = [cls.get(hash=hash) for hash in hashes if hashes]
         return messages
 
+
 class Persona(ModelBase, HBaseBase, ESPersona):
     hbase_table = 'persona'
     hbase_family = 'persona'
