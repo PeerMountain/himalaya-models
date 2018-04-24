@@ -108,8 +108,9 @@ class Message(ModelBase, HBaseBase, ESMessage):
         acl = result.get('acl')
         if acl:
             unpacked_acl = unpackb(acl)
-            if unpacked_acl:
-                for item in unpacked_acl:
+            acls = unpacked_acl.get('ACL')
+            if acls:
+                for item in acls:
                     persona = Persona.get(address=item['reader'])
                     item['reader'] = {
                         'address': persona.get('address'),
