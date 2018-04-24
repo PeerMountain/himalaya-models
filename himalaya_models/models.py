@@ -63,11 +63,62 @@ class Message(ModelBase, HBaseBase, ESMessage):
         return f"<Message: '{self.hash}'>"
 
     def to_dict(self):
+        """
+        The MessageEnvelope structure used accross the infrastructure
+        have fields in camelCase. Since, this is a Pythonic library, the
+        to_dict() results returns fields in the pythonic_way.
+
+        The to_dict() method is highly used by Reader to return the Message
+        in JSON format. Here, we change all the field names to be complient
+        with the MessageEnvelope structure.
+        """
+
         result = super().to_dict()
+
+        persona_sender = result.get('persona_sender')
+        if persona_sender:
+            result['sender'] = persona_sender
+            result.pop('persona_sender')
+
+        type = result.get('type')
+        if type:
+            result['messageType'] = type
+            result.pop('type')
+
+        hash = result.get('hash')
+        if hash:
+            result['messageHash'] = hash
+            result.pop('hash')
+
+        signature = result.get('signature')
+        if signature:
+            result['messageSign'] = signature
+            result.pop('signature')
+
+        dossier_hash = result.get('dossier_hash')
+        if dossier_hash:
+            result['dossierHash'] = dossier_hash
+            result.pop('dossier_hash')
+
+        body_hash = result.get('body_hash')
+        if body_hash:
+            result['bodyHash'] = body_hash
+            result.pop('body_hash')
 
         acl = result.get('acl')
         if acl:
-            result['acl'] = unpackb(acl)
+            unpacked_acl = unpackb(acl)
+            if unpacked_acl:
+                for item in unpacked_acl:
+                    persona = Persona.get(address=item['reader'])
+                    item['reader'] = {
+                        'address': persona.get('address'),
+                        'nickname': persona.get('nickname'),
+                        'pubkey': persona.get('pubkey'),
+                    }
+
+            result['ACL'] = unpacked_acl
+            result.pop('acl')
 
         objects = result.get('objects')
         if objects:
