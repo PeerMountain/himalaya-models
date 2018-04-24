@@ -4,7 +4,16 @@ import logging.config
 from umsgpack import unpackb
 
 from himalaya_models.config import ES_URL, LOGGING
-from elasticsearch_dsl import connections, DocType, Text, Keyword, InnerDoc, Nested, Q
+from elasticsearch_dsl import (
+    connections,
+    DocType,
+    Text,
+    Keyword,
+    InnerDoc,
+    Nested,
+    Q,
+    analyzer,
+)
 from elasticsearch.exceptions import ConnectionError
 
 
@@ -133,9 +142,16 @@ class ESMessage(DocType):
                 raise Exception(message)
 
 
+noop_analyzer = analyzer(
+    'noop_analyzer',
+    type='keyword',
+    tokenizer='keyword',
+)
+
+
 class ESPersona(DocType):
     address = Keyword()
-    pubkey = Keyword()
+    pubkey = Text(analyzer=noop_analyzer)
     nickname = Keyword()
     created_at = Text()
 
