@@ -102,6 +102,8 @@ class HBaseBase:
         for field in self.hbase_fields:
             full_field_name = f'{self.hbase_family}:{field}'.encode()
             value = getattr(self, field)
+            if 'pubkey' in field:
+                value = value.lstrip('\n').rstrip('\n')
             if not isinstance(value, bytes):
                 value = self.to_bytes(value)
             save_payload[full_field_name] = value

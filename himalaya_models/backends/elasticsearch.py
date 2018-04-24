@@ -165,6 +165,11 @@ class ESPersona(DocType):
 
     def save(self, **kwargs):
         self.meta.id = self.address
+
+        # Clean pubkeys break line from fiels
+        if self.pubkey:
+            self.pubkey = self.pubkey.lstrip('\n').rstrip('\n')
+
         return super().save(**kwargs)
 
     @classmethod
