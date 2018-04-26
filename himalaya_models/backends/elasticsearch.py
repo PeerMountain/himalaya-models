@@ -109,7 +109,11 @@ class ESMessage(DocType):
 
         # Adds container
         for object in unpackb(self.objects):
-            container_hash = object.get('container').get('containerHash')
+            container = object.get('container')
+            if not container:
+                continue
+
+            container_hash = container.get('containerHash')
             if container_hash:
                 message.add_container(container_hash)
 
